@@ -3,6 +3,7 @@
 import { Card } from "@/components/ui/card"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Star } from "lucide-react"
+import { ScrollAnimation } from "./scroll-animation"
 
 const reviews = [
   {
@@ -53,46 +54,58 @@ export function ReviewsSection() {
   return (
     <section id="reviews" className="py-24 sm:py-32 bg-muted/30">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-2xl mx-auto text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 text-balance">
-            What Our <span className="text-primary">Community Says</span>
-          </h2>
-          <p className="text-lg text-muted-foreground text-balance">
-            Real feedback from people making a real difference with GreenSpark
-          </p>
-        </div>
+        <ScrollAnimation animation="fade-up">
+          <div className="max-w-2xl mx-auto text-center mb-16">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 text-balance">
+              What Our <span className="text-primary">Community Says</span>
+            </h2>
+            <p className="text-lg text-muted-foreground text-balance">
+              Real feedback from people making a real difference with GreenSpark
+            </p>
+          </div>
+        </ScrollAnimation>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {reviews.map((review, index) => (
-            <Card key={index} className="p-6 hover:shadow-lg transition-all duration-300">
-              <div className="space-y-4">
-                <div className="flex items-center gap-3">
-                  <Avatar className="w-12 h-12">
-                    <AvatarFallback className="bg-primary text-primary-foreground">{review.avatar}</AvatarFallback>
-                  </Avatar>
-                  <div className="flex-1">
-                    <div className="font-semibold">{review.name}</div>
-                    <div className="text-sm text-muted-foreground">{review.role}</div>
+            <ScrollAnimation key={index} animation="scale-in" delay={index * 100}>
+              <Card className="p-6 h-full transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 hover:border-primary/40 group">
+                <div className="space-y-4">
+                  <div className="flex items-center gap-3">
+                    <Avatar className="w-12 h-12 transition-transform duration-300 group-hover:scale-110">
+                      <AvatarFallback className="bg-primary text-primary-foreground">{review.avatar}</AvatarFallback>
+                    </Avatar>
+                    <div className="flex-1">
+                      <div className="font-semibold transition-colors duration-300 group-hover:text-primary">
+                        {review.name}
+                      </div>
+                      <div className="text-sm text-muted-foreground">{review.role}</div>
+                    </div>
                   </div>
+                  <div className="flex gap-1">
+                    {Array.from({ length: review.rating }).map((_, i) => (
+                      <Star
+                        key={i}
+                        className="w-4 h-4 fill-primary text-primary transition-transform duration-300 group-hover:scale-125"
+                        style={{ transitionDelay: `${i * 50}ms` }}
+                      />
+                    ))}
+                  </div>
+                  <p className="text-muted-foreground leading-relaxed">{review.text}</p>
                 </div>
-                <div className="flex gap-1">
-                  {Array.from({ length: review.rating }).map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-primary text-primary" />
-                  ))}
-                </div>
-                <p className="text-muted-foreground leading-relaxed">{review.text}</p>
-              </div>
-            </Card>
+              </Card>
+            </ScrollAnimation>
           ))}
         </div>
 
-        <div className="mt-12 text-center">
-          <div className="inline-flex items-center gap-2 text-muted-foreground">
-            <Star className="w-5 h-5 fill-primary text-primary" />
-            <span className="text-lg font-semibold text-foreground">4.9/5</span>
-            <span>average rating from 2,847 reviews</span>
+        <ScrollAnimation animation="fade-up" delay={200}>
+          <div className="mt-12 text-center">
+            <div className="inline-flex items-center gap-2 text-muted-foreground transition-all duration-300 hover:scale-105">
+              <Star className="w-5 h-5 fill-primary text-primary" />
+              <span className="text-lg font-semibold text-foreground">4.9/5</span>
+              <span>average rating from 2,847 reviews</span>
+            </div>
           </div>
-        </div>
+        </ScrollAnimation>
       </div>
     </section>
   )

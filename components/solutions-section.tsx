@@ -1,5 +1,6 @@
 import { Card } from "@/components/ui/card"
 import { CheckCircle2, Flame, Factory, Trash2, Droplets, TreePine, Wind, Fish } from "lucide-react"
+import { ScrollAnimation } from "./scroll-animation"
 
 const solutions = [
   {
@@ -64,64 +65,73 @@ export function SolutionsSection() {
   return (
     <section id="solutions" className="py-24 sm:py-32">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-2xl mx-auto text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 text-balance">
-            Our <span className="text-primary">Solutions</span> & Environmental Impact
-          </h2>
-          <p className="text-lg text-muted-foreground text-balance">
-            Proven strategies that create measurable environmental change and protect our planet for future generations
-          </p>
-        </div>
+        <ScrollAnimation animation="fade-up">
+          <div className="max-w-2xl mx-auto text-center mb-16">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 text-balance">
+              Our <span className="text-primary">Solutions</span> & Environmental Impact
+            </h2>
+            <p className="text-lg text-muted-foreground text-balance">
+              Proven strategies that create measurable environmental change and protect our planet for future
+              generations
+            </p>
+          </div>
+        </ScrollAnimation>
 
         <div className="grid md:grid-cols-2 gap-6 lg:gap-8 max-w-6xl mx-auto">
           {solutions.map((solution, index) => (
-            <Card key={index} className="p-8 hover:shadow-lg transition-all duration-300 bg-card">
-              <div className="space-y-4">
-                <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center">
-                  <solution.icon className="w-7 h-7 text-primary" />
-                </div>
-                <h3 className="text-2xl font-semibold">{solution.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">{solution.description}</p>
-                <div className="space-y-2 pt-2">
-                  <div className="flex items-start gap-2 text-primary">
-                    <CheckCircle2 className="w-5 h-5 mt-0.5 flex-shrink-0" />
-                    <span className="text-sm font-medium">{solution.impact}</span>
+            <ScrollAnimation key={index} animation={index % 2 === 0 ? "slide-left" : "slide-right"} delay={index * 100}>
+              <Card className="p-8 h-full transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 hover:border-primary/40 bg-card group">
+                <div className="space-y-4">
+                  <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center transition-all duration-300 group-hover:bg-primary/20 group-hover:scale-110 group-hover:rotate-6">
+                    <solution.icon className="w-7 h-7 text-primary transition-transform duration-300 group-hover:scale-110" />
                   </div>
-                  <div className="flex items-start gap-2 text-green-600">
-                    <CheckCircle2 className="w-5 h-5 mt-0.5 flex-shrink-0" />
-                    <span className="text-sm font-medium">{solution.savings}</span>
+                  <h3 className="text-2xl font-semibold transition-colors duration-300 group-hover:text-primary">
+                    {solution.title}
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed">{solution.description}</p>
+                  <div className="space-y-2 pt-2">
+                    <div className="flex items-start gap-2 text-primary transition-all duration-300 group-hover:translate-x-1">
+                      <CheckCircle2 className="w-5 h-5 mt-0.5 flex-shrink-0" />
+                      <span className="text-sm font-medium">{solution.impact}</span>
+                    </div>
+                    <div className="flex items-start gap-2 text-green-600 transition-all duration-300 group-hover:translate-x-1">
+                      <CheckCircle2 className="w-5 h-5 mt-0.5 flex-shrink-0" />
+                      <span className="text-sm font-medium">{solution.savings}</span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </Card>
+              </Card>
+            </ScrollAnimation>
           ))}
         </div>
 
-        <div className="mt-16 max-w-4xl mx-auto">
-          <Card className="p-8 bg-gradient-to-br from-primary/5 to-accent/5 border-primary/20">
-            <h3 className="text-2xl font-bold mb-6 text-center">Budget Allocation & Revenue Model</h3>
-            <div className="grid sm:grid-cols-3 gap-6">
-              <div className="text-center space-y-2">
-                <div className="text-3xl font-bold text-primary">45%</div>
-                <div className="text-sm text-muted-foreground">Platform Development & Operations</div>
+        <ScrollAnimation animation="scale-in" delay={200}>
+          <div className="mt-16 max-w-4xl mx-auto">
+            <Card className="p-8 bg-gradient-to-br from-primary/5 to-accent/5 border-primary/20 transition-all duration-300 hover:shadow-xl hover:scale-[1.02]">
+              <h3 className="text-2xl font-bold mb-6 text-center">Budget Allocation & Revenue Model</h3>
+              <div className="grid sm:grid-cols-3 gap-6">
+                <div className="text-center space-y-2 transition-transform duration-300 hover:scale-110">
+                  <div className="text-3xl font-bold text-primary">45%</div>
+                  <div className="text-sm text-muted-foreground">Platform Development & Operations</div>
+                </div>
+                <div className="text-center space-y-2 transition-transform duration-300 hover:scale-110">
+                  <div className="text-3xl font-bold text-primary">30%</div>
+                  <div className="text-sm text-muted-foreground">Community Programs & Materials</div>
+                </div>
+                <div className="text-center space-y-2 transition-transform duration-300 hover:scale-110">
+                  <div className="text-3xl font-bold text-primary">25%</div>
+                  <div className="text-sm text-muted-foreground">Marketing & Growth</div>
+                </div>
               </div>
-              <div className="text-center space-y-2">
-                <div className="text-3xl font-bold text-primary">30%</div>
-                <div className="text-sm text-muted-foreground">Community Programs & Materials</div>
+              <div className="mt-8 pt-6 border-t border-border">
+                <p className="text-center text-muted-foreground">
+                  <span className="font-semibold text-foreground">Revenue Sources:</span> Corporate sponsorships,
+                  premium memberships, carbon credit partnerships, and grant funding
+                </p>
               </div>
-              <div className="text-center space-y-2">
-                <div className="text-3xl font-bold text-primary">25%</div>
-                <div className="text-sm text-muted-foreground">Marketing & Growth</div>
-              </div>
-            </div>
-            <div className="mt-8 pt-6 border-t border-border">
-              <p className="text-center text-muted-foreground">
-                <span className="font-semibold text-foreground">Revenue Sources:</span> Corporate sponsorships, premium
-                memberships, carbon credit partnerships, and grant funding
-              </p>
-            </div>
-          </Card>
-        </div>
+            </Card>
+          </div>
+        </ScrollAnimation>
       </div>
     </section>
   )

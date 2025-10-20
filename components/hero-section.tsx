@@ -30,27 +30,36 @@ export function HeroSection() {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-            <Button size="lg" asChild className="text-base px-8">
+            <Button
+              size="lg"
+              asChild
+              className="text-base px-8 transition-all duration-300 hover:scale-105 hover:shadow-xl active:scale-95"
+            >
               <a href="https://green-spark-190cd2eb.base44.app" target="_blank" rel="noopener noreferrer">
                 Launch GreenSpark
-                <ArrowRight className="ml-2 w-5 h-5" />
+                <ArrowRight className="ml-2 w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
               </a>
             </Button>
-            <Button size="lg" variant="outline" asChild className="text-base px-8 bg-transparent">
+            <Button
+              size="lg"
+              variant="outline"
+              asChild
+              className="text-base px-8 border-2 border-primary/50 bg-gradient-to-r from-primary/10 to-accent/10 hover:from-primary hover:to-accent hover:text-white hover:border-transparent transition-all duration-300 hover:scale-105 hover:shadow-xl active:scale-95"
+            >
               <a href="#features">Learn More</a>
             </Button>
           </div>
 
           <div className="grid grid-cols-3 gap-8 pt-12 max-w-2xl mx-auto">
-            <div className="space-y-2">
+            <div className="space-y-2 animate-count-up" style={{ animationDelay: "0.2s", opacity: 0 }}>
               <div className="text-3xl sm:text-4xl font-bold text-primary">13+</div>
               <div className="text-sm text-muted-foreground">Active Challenges</div>
             </div>
-            <div className="space-y-2">
+            <div className="space-y-2 animate-count-up" style={{ animationDelay: "0.4s", opacity: 0 }}>
               <div className="text-3xl sm:text-4xl font-bold text-primary">10K+</div>
               <div className="text-sm text-muted-foreground">Community Members</div>
             </div>
-            <div className="space-y-2">
+            <div className="space-y-2 animate-count-up" style={{ animationDelay: "0.6s", opacity: 0 }}>
               <div className="text-3xl sm:text-4xl font-bold text-primary">50K+</div>
               <div className="text-sm text-muted-foreground">Actions Completed</div>
             </div>
