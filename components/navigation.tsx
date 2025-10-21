@@ -18,7 +18,7 @@ export function Navigation() {
 
   const navItems = [
     { label: "Features", href: "#features" },
-    { label: "UAE Vision", href: "#uae-alignment" },
+    { label: "Impact Map", href: "#impact-map" },
     { label: "Challenges", href: "#challenges" },
     { label: "Impact", href: "#solutions" },
     { label: "Reviews", href: "#reviews" },

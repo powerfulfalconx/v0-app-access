@@ -189,6 +189,19 @@
   }
 }
 
+/* Adding pulse animation for map markers */
+@keyframes pulse-slow {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.1);
+  }
+}
+
 .animate-float {
   animation: float 6s ease-in-out infinite;
 }
@@ -212,6 +225,11 @@
 
 .animate-count-up {
   animation: countUp 0.8s ease-out forwards;
+}
+
+/* Adding pulse-slow animation class */
+.animate-pulse-slow {
+  animation: pulse-slow 2s ease-in-out infinite;
 }
 
 /* Adding smooth transition utilities for interactive elements */
