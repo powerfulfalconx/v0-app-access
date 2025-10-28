@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
+import Image from "next/image"
 
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -20,6 +21,7 @@ export function Navigation() {
     { label: "Features", href: "#features" },
     { label: "Impact Map", href: "#impact-map" },
     { label: "Challenges", href: "#challenges" },
+    { label: "Global Pulse", href: "#global-pulse" },
     { label: "Impact", href: "#solutions" },
     { label: "Reviews", href: "#reviews" },
     { label: "Future", href: "#future" },
@@ -28,16 +30,18 @@ export function Navigation() {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-background/80 backdrop-blur-lg border-b border-border" : "bg-transparent"
+        isScrolled ? "bg-background/95 backdrop-blur-xl border-b border-border shadow-lg" : "bg-transparent"
       }`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-20">
-          <div className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-lg">GS</span>
+          <div className="flex items-center gap-3">
+            <div className="relative w-10 h-10 sm:w-12 sm:h-12 transition-transform duration-300 hover:scale-110">
+              <Image src="/images/greenspark-logo.png" alt="GreenSpark Logo" fill className="object-contain" priority />
             </div>
-            <span className="font-bold text-xl">GreenSpark</span>
+            <span className="font-bold text-xl sm:text-2xl bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+              GreenSpark
+            </span>
           </div>
 
           <div className="hidden md:flex items-center gap-8">

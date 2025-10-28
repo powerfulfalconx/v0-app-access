@@ -2,6 +2,7 @@ import { HeroSection } from "@/components/hero-section"
 import { FeaturesSection } from "@/components/features-section"
 import { ImpactHeatmapSection } from "@/components/impact-heatmap-section"
 import { ChallengesSection } from "@/components/challenges-section"
+import { GlobalGreenPulseSection } from "@/components/global-green-pulse-section"
 import { ProblemsSection } from "@/components/problems-section"
 import { SolutionsSection } from "@/components/solutions-section"
 import { ReviewsSection } from "@/components/reviews-section"
@@ -18,6 +19,7 @@ export default function Home() {
       <FeaturesSection />
       <ImpactHeatmapSection />
       <ChallengesSection />
+      <GlobalGreenPulseSection />
       <ProblemsSection />
       <SolutionsSection />
       <ReviewsSection />

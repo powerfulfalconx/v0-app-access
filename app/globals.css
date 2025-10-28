@@ -189,6 +189,17 @@
   }
 }
 
+/* Adding gradient animation for hero title */
+@keyframes gradient {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
 /* Adding pulse animation for map markers */
 @keyframes pulse-slow {
   0%,
@@ -225,6 +236,12 @@
 
 .animate-count-up {
   animation: countUp 0.8s ease-out forwards;
+}
+
+/* Adding gradient animation utility class */
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient 3s ease infinite;
 }
 
 /* Adding pulse-slow animation class */
