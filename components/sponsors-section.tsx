@@ -45,24 +45,6 @@ export function SponsorsSection() {
             </ScrollAnimation>
           ))}
         </div>
-
-        <ScrollAnimation animation="fade-up" delay={200}>
-          <div className="mt-16 max-w-3xl mx-auto text-center">
-            <Card className="p-8 hover:shadow-xl transition-all duration-300">
-              <h3 className="text-2xl font-bold mb-4">Become a Partner</h3>
-              <p className="text-muted-foreground mb-6 leading-relaxed">
-                Join leading organizations in supporting global sustainability initiatives. Partnership opportunities
-                start at $50K annually and include brand visibility, impact reporting, and employee engagement programs.
-              </p>
-              <a
-                href="mailto:partnerships@greenspark.app"
-                className="inline-flex items-center justify-center rounded-lg bg-primary px-6 py-3 text-sm font-medium text-primary-foreground hover:bg-primary/90 hover:scale-105 active:scale-95 transition-all duration-200 shadow-lg hover:shadow-xl"
-              >
-                Contact Partnership Team
-              </a>
-            </Card>
-          </div>
-        </ScrollAnimation>
       </div>
     </section>
   )

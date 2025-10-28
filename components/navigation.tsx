@@ -2,12 +2,14 @@
 
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
-import { Menu, X } from "lucide-react"
+import { Menu, X, Download } from "lucide-react"
 import Image from "next/image"
 
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [deferredPrompt, setDeferredPrompt] = useState<any>(null)
+  const [isInstallable, setIsInstallable] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,6 +18,41 @@ export function Navigation() {
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
+
+  useEffect(() => {
+    const handler = (e: Event) => {
+      e.preventDefault()
+      setDeferredPrompt(e)
+      setIsInstallable(true)
+    }
+
+    window.addEventListener("beforeinstallprompt", handler)
+
+    // Check if app is already installed
+    if (window.matchMedia("(display-mode: standalone)").matches) {
+      setIsInstallable(false)
+    }
+
+    return () => window.removeEventListener("beforeinstallprompt", handler)
+  }, [])
+
+  const handleInstall = async () => {
+    if (!deferredPrompt) {
+      // Fallback: show alert explaining PWA installation
+      alert(
+        "To install this web app:\n\n1. On Chrome/Edge: Click the install icon in the address bar\n2. On Safari (iOS): Tap Share → Add to Home Screen\n3. On Android: Tap menu → Install app",
+      )
+      return
+    }
+
+    deferredPrompt.prompt()
+    const { outcome } = await deferredPrompt.userChoice
+
+    if (outcome === "accepted") {
+      setDeferredPrompt(null)
+      setIsInstallable(false)
+    }
+  }
 
   const navItems = [
     { label: "Features", href: "#features" },
@@ -54,10 +91,12 @@ export function Navigation() {
                 {item.label}
               </a>
             ))}
-            <Button asChild>
-              <a href="https://green-spark-190cd2eb.base44.app" target="_blank" rel="noopener noreferrer">
-                Try GreenSpark
-              </a>
+            <Button
+              onClick={handleInstall}
+              className="transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl"
+            >
+              <Download className="w-4 h-4 mr-2" />
+              {isInstallable ? "Install Web App" : "Install App"}
             </Button>
           </div>
 
@@ -80,10 +119,12 @@ export function Navigation() {
                 {item.label}
               </a>
             ))}
-            <Button asChild className="w-full">
-              <a href="https://green-spark-190cd2eb.base44.app" target="_blank" rel="noopener noreferrer">
-                Try GreenSpark
-              </a>
+            <Button
+              onClick={handleInstall}
+              className="w-full transition-all duration-300 hover:scale-105 active:scale-95"
+            >
+              <Download className="w-4 h-4 mr-2" />
+              {isInstallable ? "Install Web App" : "Install App"}
             </Button>
           </div>
         </div>

@@ -31,6 +31,8 @@ import {
   TrendingUp,
   CheckCircle2,
   Sparkles,
+  MapPin,
+  AlertTriangle,
 } from "lucide-react"
 
 const challenges = [
@@ -41,6 +43,15 @@ const challenges = [
     description: "Addressing global freshwater shortage and sustainable water management solutions",
     severity: "Critical",
     color: "from-blue-500 to-cyan-500",
+    affectedRegions: [
+      "Cape Town, South Africa",
+      "Chennai, India",
+      "São Paulo, Brazil",
+      "California, USA",
+      "Middle East Region",
+    ],
+    problemDetails:
+      "Over 2 billion people worldwide lack access to safe drinking water. Climate change, population growth, and inefficient water management are depleting freshwater sources. Aquifers are being drained faster than they can be replenished, leading to severe droughts and water conflicts.",
   },
   {
     id: 2,
@@ -49,6 +60,15 @@ const challenges = [
     description: "Combating forest destruction and protecting biodiversity hotspots worldwide",
     severity: "Critical",
     color: "from-green-600 to-emerald-600",
+    affectedRegions: [
+      "Amazon Rainforest, Brazil",
+      "Congo Basin, Central Africa",
+      "Borneo, Indonesia",
+      "Madagascar",
+      "Southeast Asia",
+    ],
+    problemDetails:
+      "An estimated 10 million hectares of forest are lost annually, equivalent to 27 soccer fields every minute. Deforestation destroys habitats for 80% of terrestrial species, disrupts water cycles, and releases massive amounts of CO₂, accelerating climate change.",
   },
   {
     id: 3,
@@ -57,6 +77,15 @@ const challenges = [
     description: "Preventing soil loss and restoring degraded agricultural lands",
     severity: "High",
     color: "from-amber-600 to-orange-600",
+    affectedRegions: [
+      "Sub-Saharan Africa",
+      "Central Asia",
+      "Mediterranean Region",
+      "Great Plains, USA",
+      "Northern China",
+    ],
+    problemDetails:
+      "Approximately 24 billion tons of fertile soil are lost each year due to erosion. Unsustainable farming practices, overgrazing, and deforestation leave land barren and unproductive, threatening food security for billions and increasing desertification.",
   },
   {
     id: 4,
@@ -65,6 +94,9 @@ const challenges = [
     description: "Reducing harmful emissions and improving air quality in cities",
     severity: "Critical",
     color: "from-gray-500 to-slate-600",
+    affectedRegions: ["Delhi, India", "Beijing, China", "Jakarta, Indonesia", "Cairo, Egypt", "Los Angeles, USA"],
+    problemDetails:
+      "Air pollution causes 7 million premature deaths annually. Vehicle emissions, industrial activities, and burning fossil fuels release particulate matter and toxic gases that damage lungs, hearts, and brains, particularly affecting children and elderly populations.",
   },
   {
     id: 5,
@@ -73,6 +105,15 @@ const challenges = [
     description: "Eliminating plastic pollution and protecting marine ecosystems",
     severity: "Critical",
     color: "from-blue-600 to-indigo-600",
+    affectedRegions: [
+      "Great Pacific Garbage Patch",
+      "Mediterranean Sea",
+      "Caribbean Islands",
+      "Southeast Asian Coasts",
+      "Indian Ocean",
+    ],
+    problemDetails:
+      "Over 8 million tons of plastic enter oceans yearly, forming massive garbage patches. Marine life ingests microplastics, which enter the food chain and harm human health. Coral reefs suffocate under plastic debris, and sea turtles mistake bags for jellyfish.",
   },
   {
     id: 6,
@@ -81,6 +122,9 @@ const challenges = [
     description: "Preventing wildfires and protecting endangered species",
     severity: "High",
     color: "from-red-600 to-orange-600",
+    affectedRegions: ["Australia", "California, USA", "Amazon Basin", "Siberia, Russia", "Mediterranean Europe"],
+    problemDetails:
+      "Climate change intensifies wildfires, destroying millions of hectares annually. These fires release enormous CO₂ amounts, kill wildlife, destroy homes, and create toxic smoke affecting millions. Australia's 2019-2020 fires killed over 1 billion animals.",
   },
   {
     id: 7,
@@ -89,6 +133,9 @@ const challenges = [
     description: "Mitigating climate change and preserving polar regions",
     severity: "Critical",
     color: "from-red-500 to-pink-500",
+    affectedRegions: ["Arctic Circle", "Antarctica", "Greenland", "Himalayan Glaciers", "Alaska, USA"],
+    problemDetails:
+      "Global temperatures have risen 1.1°C since pre-industrial times. Polar ice melts at alarming rates, raising sea levels and threatening coastal cities. Permafrost thawing releases methane, a potent greenhouse gas, creating a dangerous feedback loop.",
   },
   {
     id: 8,
@@ -97,6 +144,9 @@ const challenges = [
     description: "Building resilience against hurricanes, floods, and droughts",
     severity: "High",
     color: "from-purple-600 to-violet-600",
+    affectedRegions: ["Caribbean Islands", "Bangladesh", "Philippines", "Horn of Africa", "Southern United States"],
+    problemDetails:
+      "Climate change increases frequency and intensity of extreme weather. Hurricanes, floods, and droughts displace millions, destroy infrastructure, and cause billions in damages. Vulnerable communities face repeated disasters with insufficient recovery time.",
   },
   {
     id: 9,
@@ -105,6 +155,9 @@ const challenges = [
     description: "Promoting circular economy and reducing waste generation",
     severity: "High",
     color: "from-yellow-600 to-amber-600",
+    affectedRegions: ["Southeast Asia", "Sub-Saharan Africa", "Latin America", "Eastern Europe", "Pacific Islands"],
+    problemDetails:
+      "Humanity generates 2 billion tons of waste annually, with only 13.5% recycled. Landfills overflow, releasing methane and leaching toxins into groundwater. E-waste contains hazardous materials poisoning communities, while overconsumption depletes natural resources.",
   },
   {
     id: 10,
@@ -113,6 +166,9 @@ const challenges = [
     description: "Protecting bees, butterflies, and maintaining ecological harmony",
     severity: "High",
     color: "from-lime-600 to-green-600",
+    affectedRegions: ["North America", "Europe", "Central America", "East Africa", "Southeast Asia"],
+    problemDetails:
+      "Pollinator populations have declined 40% in recent decades due to pesticides, habitat loss, and climate change. Since pollinators are responsible for 75% of food crops, their decline threatens global food security and ecosystem stability.",
   },
 ]
 
@@ -288,28 +344,57 @@ export function GlobalGreenPulseSection() {
                           <p className="text-sm text-muted-foreground leading-relaxed">{challenge.description}</p>
 
                           {isSelected && (
-                            <div className="pt-4 space-y-3 border-t border-border/50 animate-fade-in-up">
-                              <div className="flex items-center gap-2 text-sm">
-                                <Users className="w-4 h-4 text-primary" />
-                                <span className="text-muted-foreground">
-                                  <strong className="text-foreground">2,847</strong> users working on solutions
-                                </span>
+                            <div className="pt-4 space-y-4 border-t border-border/50 animate-fade-in-up">
+                              <div className="space-y-3">
+                                <div className="flex items-start gap-2">
+                                  <AlertTriangle className="w-5 h-5 text-destructive flex-shrink-0 mt-0.5" />
+                                  <div>
+                                    <h5 className="font-semibold text-sm mb-1">The Problem:</h5>
+                                    <p className="text-sm text-muted-foreground leading-relaxed">
+                                      {challenge.problemDetails}
+                                    </p>
+                                  </div>
+                                </div>
+
+                                <div className="flex items-start gap-2">
+                                  <MapPin className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                                  <div>
+                                    <h5 className="font-semibold text-sm mb-2">Most Affected Regions:</h5>
+                                    <div className="flex flex-wrap gap-2">
+                                      {challenge.affectedRegions.map((region, idx) => (
+                                        <Badge key={idx} variant="outline" className="text-xs">
+                                          {region}
+                                        </Badge>
+                                      ))}
+                                    </div>
+                                  </div>
+                                </div>
                               </div>
-                              <div className="flex items-center gap-2 text-sm">
-                                <FileText className="w-4 h-4 text-accent" />
-                                <span className="text-muted-foreground">
-                                  <strong className="text-foreground">156</strong> proposals submitted this month
-                                </span>
-                              </div>
-                              {submissionCount > 0 && (
+
+                              <div className="pt-2 space-y-2 border-t border-border/30">
                                 <div className="flex items-center gap-2 text-sm">
-                                  <CheckCircle2 className="w-4 h-4 text-green-500" />
+                                  <Users className="w-4 h-4 text-primary" />
                                   <span className="text-muted-foreground">
-                                    <strong className="text-green-500">{submissionCount}</strong> solution
-                                    {submissionCount > 1 ? "s" : ""} submitted by you
+                                    <strong className="text-foreground">2,847</strong> users working on solutions
                                   </span>
                                 </div>
-                              )}
+                                <div className="flex items-center gap-2 text-sm">
+                                  <FileText className="w-4 h-4 text-accent" />
+                                  <span className="text-muted-foreground">
+                                    <strong className="text-foreground">156</strong> proposals submitted this month
+                                  </span>
+                                </div>
+                                {submissionCount > 0 && (
+                                  <div className="flex items-center gap-2 text-sm">
+                                    <CheckCircle2 className="w-4 h-4 text-green-500" />
+                                    <span className="text-muted-foreground">
+                                      <strong className="text-green-500">{submissionCount}</strong> solution
+                                      {submissionCount > 1 ? "s" : ""} submitted by you
+                                    </span>
+                                  </div>
+                                )}
+                              </div>
+
                               <Button
                                 className="w-full mt-2"
                                 size="sm"
